@@ -1796,6 +1796,36 @@ public class FileHandler {
         }
         return sum;
     }
+    
+     public static int[] sortA1ByA2(int arr1[], int N, int arr2[], int M)
+    {
+        //Your code here
+        int ans[] = new int[N];
+        int k=0;
+        HashMap<Integer,Integer> mp = new HashMap<>();
+
+        for(int i=0;i<N;i++)
+            mp.put(arr1[i],mp.getOrDefault(arr1[i],0)+1);
+        
+        int s=0;
+        for(int i=0;i<M;i++){
+            if(mp.containsKey(arr2[i])){
+                while(mp.get(arr2[i])>0){
+                    ans[k++] = arr2[i];
+                    mp.put(arr2[i],mp.get(arr2[i])-1);
+                }
+            }
+        }
+        s=k;
+        for(Map.Entry<Integer,Integer> entry : mp.entrySet()){
+            while(entry.getValue()>=1){
+                ans[k++] = entry.getKey();
+                mp.put(entry.getKey(),entry.getValue()-1);
+            }
+        }
+        Arrays.sort(ans,s,N);
+        return ans;
+    }
 
     void solve() {
 
