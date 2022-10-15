@@ -1826,6 +1826,39 @@ public class FileHandler {
         Arrays.sort(ans,s,N);
         return ans;
     }
+    
+    public static int maxMeetings(int start[], int end[], int n)
+    {
+        // add your code here
+       ArrayList<Pair> pair = new ArrayList<>();
+        
+        for(int i=0; i<n; i++)
+            pair.add(new Pair(start[i], end[i]));
+            
+        Collections.sort(pair, (p1, p2) -> (p1.second - p2.second));
+        
+        int count=1;
+        int last = pair.get(0).second;
+        
+        for(int i=1; i<n; i++)
+        {
+            if(pair.get(i).first > last){
+                count++;
+                last = pair.get(i).second;
+            }
+        }
+        return count;
+    }
+    
+    static class Pair{
+        int first;
+        int second;
+        Pair(int f, int s)
+        {
+            this.first = f;
+            this.second = s;
+        }
+    }
 
     void solve() {
 
